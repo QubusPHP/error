@@ -5,10 +5,8 @@
  *
  * @link       https://github.com/QubusPHP/error
  * @copyright  2022
- * @author     Joshua Parker <josh@joshuaparker.blog>
+ * @author     Joshua Parker <joshua@joshuaparker.dev>
  * @license    https://opensource.org/licenses/mit-license.php MIT License
- *
- * @since      1.0.0
  */
 
 declare(strict_types=1);
@@ -20,7 +18,6 @@ use const E_COMPILE_WARNING;
 use const E_CORE_ERROR;
 use const E_CORE_WARNING;
 use const E_DEPRECATED;
-use const E_ERROR;
 use const E_NOTICE;
 use const E_PARSE;
 use const E_RECOVERABLE_ERROR;
@@ -147,7 +144,7 @@ final class DebugErrorHandler implements ErrorHandler
      * @param int $repeat  → number of times to repeat method
      * @param bool $default → show default view
      */
-    public function setCustomMethod(object|string $class, string $method, int $repeat = 0, bool $default = false)
+    public function setCustomMethod(object|string $class, string $method, int $repeat = 0, bool $default = false): void
     {
         $this->customMethods[] = [$class, $method, $repeat, $default];
     }
@@ -189,7 +186,7 @@ final class DebugErrorHandler implements ErrorHandler
     /**
      * Get preview of the error line.
      */
-    protected function getPreviewCode()
+    protected function getPreviewCode(): void
     {
         $file = file(filename: $this->stack['file']);
         $line = $this->stack['line'];

@@ -5,10 +5,8 @@
  *
  * @link       https://github.com/QubusPHP/error
  * @copyright  2022
- * @author     Joshua Parker <josh@joshuaparker.blog>
+ * @author     Joshua Parker <joshua@joshuaparker.dev>
  * @license    https://opensource.org/licenses/mit-license.php MIT License
- *
- * @since      1.0.0
  */
 
 declare(strict_types=1);
@@ -165,7 +163,7 @@ final class ProductionErrorHandler implements ErrorHandler
      *
      * @throws Throwable
      */
-    public function registerShutdownHandler()
+    public function registerShutdownHandler(): void
     {
         $error = error_get_last();
         if (!empty($error) && is_array(value: $error)) {
@@ -182,7 +180,7 @@ final class ProductionErrorHandler implements ErrorHandler
         }
     }
 
-    private function registerAllHandlers()
+    private function registerAllHandlers(): void
     {
         // Force error reporting to always be on. But hide it for the user.
         error_reporting(error_level: E_ALL);

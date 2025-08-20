@@ -13,18 +13,16 @@ declare(strict_types=1);
 
 namespace Qubus\Error\Handlers;
 
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
-
 final class DebugErrorHandler implements ErrorHandler
 {
-    public Run $whoops;
+    public \Whoops\Run $whoops;
+
     /**
      * Catch errors and exceptions and execute the method.
      */
     public function __construct(private readonly string $title = 'QubusPHP Error')
     {
-        $this->registerAllHandlers();
+        $this->registerHandler();
     }
 
     /**
@@ -34,18 +32,17 @@ final class DebugErrorHandler implements ErrorHandler
      */
     public function registerErrorHandler(): void
     {
-        $this->whoops = new Run();
+        $this->whoops = new \Whoops\Run();
 
-        $Handler = new PrettyPageHandler();
+        $Handler = new \Whoops\Handler\PrettyPageHandler();
         $Handler->setPageTitle(title: $this->title);
 
         $this->whoops->pushHandler($Handler);
         $this->whoops->register();
     }
 
-    protected function registerAllHandlers(): void
+    protected function registerHandler(): void
     {
-        set_exception_handler([$this, 'registerErrorHandler']);
-        set_error_handler([$this, 'registerErrorHandler']);
+        $this->registerErrorHandler();
     }
 }

@@ -20,9 +20,9 @@ use Qubus\Error\Handlers\ProductionErrorHandler;
 
 class Factory
 {
-    public static function createDebugErrorHandler(): DebugErrorHandler
+    public static function createDebugErrorHandler(string $title = 'QubusPHP Error'): DebugErrorHandler
     {
-        return new DebugErrorHandler();
+        return new DebugErrorHandler($title);
     }
 
     public static function createPsr3ErrorHandler(LoggerInterface $logger): Psr3ErrorHandler
